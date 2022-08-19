@@ -1,5 +1,5 @@
 buildscript {
-    val kotlinVersion by extra { "1.6.21" }
+    val kotlinVersion: String by extra("1.6.21")
     repositories {
         mavenCentral()
         google()
@@ -19,5 +19,5 @@ allprojects {
     }
 }
 tasks.create(name = "clean", type = Delete::class) {
-    delete(rootProject.buildDir)
+    doLast { delete(rootProject.buildDir) }
 }

@@ -5,40 +5,20 @@
 
 package util.mddesign.util
 
-import android.content.res.ColorStateList
 import androidx.annotation.ColorInt
 import com.google.android.material.navigation.NavigationView
+import util.mddesign.color.simpleColorStateList
 
 fun NavigationView.setItemIconColors(
     @ColorInt normalColor: Int,
     @ColorInt selectedColor: Int
 ) {
-    val iconSl = ColorStateList(
-        arrayOf(
-            intArrayOf(-android.R.attr.state_checked),
-            intArrayOf(android.R.attr.state_checked)
-        ),
-        intArrayOf(
-            normalColor,
-            selectedColor
-        )
-    )
-    itemIconTintList = iconSl
+    itemIconTintList = simpleColorStateList(normalColor, selectedColor)
 }
 
 fun NavigationView.setItemTextColors(
     @ColorInt normalColor: Int,
     @ColorInt selectedColor: Int
 ) {
-    val textSl = ColorStateList(
-        arrayOf(
-            intArrayOf(-android.R.attr.state_checked),
-            intArrayOf(android.R.attr.state_checked)
-        ),
-        intArrayOf(
-            normalColor,
-            selectedColor
-        )
-    )
-    itemTextColor = textSl
+    itemTextColor = simpleColorStateList(normalColor, selectedColor)
 }

@@ -2,9 +2,9 @@
 
 package util.mddesign.util
 
-import android.content.res.ColorStateList
 import androidx.annotation.ColorInt
 import com.google.android.material.tabs.TabLayout
+import util.mddesign.color.simpleColorStateList
 import util.mddesign.drawable.createTintedDrawable
 
 /**
@@ -15,16 +15,7 @@ fun TabLayout?.setTabIconColors(
     @ColorInt selectedColor: Int
 ) {
     if (this != null) {
-        val colorStateList = ColorStateList(
-            arrayOf(
-                intArrayOf(-android.R.attr.state_selected),
-                intArrayOf(android.R.attr.state_selected)
-            ),
-            intArrayOf(
-                normalColor,
-                selectedColor
-            )
-        )
+        val colorStateList = simpleColorStateList(normalColor, selectedColor)
         for (i in 0 until tabCount) {
             val tab = this.getTabAt(i)
             if (tab != null && tab.icon != null) {

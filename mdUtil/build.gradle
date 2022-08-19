@@ -6,8 +6,8 @@ plugins {
 def libVersion = "0.0.1"
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "31.0.0"
+    compileSdk = 32
+    buildToolsVersion = "32.0.0"
 
     defaultConfig {
         minSdkVersion 21
@@ -51,7 +51,7 @@ tasks.create(name: "sourceJar", type: Jar) {
 
 
 dependencies {
-    implementation "com.github.chr56:mdColor:dev-SNAPSHOT"
+    implementation "com.github.chr56:mdColor:0.0.1"
 
     implementation "androidx.appcompat:appcompat:1.4.1"
     implementation "androidx.core:core:1.7.0"

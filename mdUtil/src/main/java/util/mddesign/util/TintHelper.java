@@ -1,5 +1,8 @@
 package util.mddesign.util;
 
+import static util.mddesign.drawable.DrawableUtil.createTintedDrawable;
+import static util.mddesign.drawable.DrawableUtil.modifySwitchDrawable;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -18,21 +21,18 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import androidx.annotation.CheckResult;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.lang.reflect.Field;
+
 import util.mdcolor.ColorUtil;
 import util.mddesign.R;
-
-import java.lang.reflect.Field;
 
 /**
  * @author afollestad, plusCubed
@@ -296,43 +296,6 @@ public final class TintHelper {
         image.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
     }
 
-    private static Drawable modifySwitchDrawable(@NonNull Context context, @NonNull Drawable from, @ColorInt int tint, boolean thumb, boolean compatSwitch, boolean useDarker) {
-        if (useDarker) {
-            tint = ColorUtil.shiftColor(tint, 1.1f);
-        }
-        tint = ColorUtil.adjustAlpha(tint, (compatSwitch && !thumb) ? 0.5f : 1.0f);
-        int disabled;
-        int normal;
-        if (thumb) {
-            disabled = ContextCompat.getColor(context, useDarker ? R.color.MD_switch_thumb_disabled_dark : R.color.MD_switch_thumb_disabled_light);
-            normal = ContextCompat.getColor(context, useDarker ? R.color.MD_switch_thumb_normal_dark : R.color.MD_switch_thumb_normal_light);
-        } else {
-            disabled = ContextCompat.getColor(context, useDarker ? R.color.MD_switch_track_disabled_dark : R.color.MD_switch_track_disabled_light);
-            normal = ContextCompat.getColor(context, useDarker ? R.color.MD_switch_track_normal_dark : R.color.MD_switch_track_normal_light);
-        }
-
-        // Stock switch includes its own alpha
-        if (!compatSwitch) {
-            normal = ColorUtil.stripAlpha(normal);
-        }
-
-        final ColorStateList sl = new ColorStateList(
-                new int[][]{
-                        new int[]{-android.R.attr.state_enabled},
-                        new int[]{android.R.attr.state_enabled, -android.R.attr.state_activated, -android.R.attr.state_checked},
-                        new int[]{android.R.attr.state_enabled, android.R.attr.state_activated},
-                        new int[]{android.R.attr.state_enabled, android.R.attr.state_checked}
-                },
-                new int[]{
-                        disabled,
-                        normal,
-                        tint,
-                        tint
-                }
-        );
-        return createTintedDrawable(from, sl);
-    }
-
     public static void setTint(@NonNull Switch switchView, @ColorInt int color, boolean useDarker) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) return;
         if (switchView.getTrackDrawable() != null) {
@@ -356,26 +319,6 @@ public final class TintHelper {
         }
     }
 
-    // This returns a NEW Drawable because of the mutate() call. The mutate() call is necessary because Drawables with the same resource have shared states otherwise.
-    @CheckResult
-    @Nullable
-    public static Drawable createTintedDrawable(@Nullable Drawable drawable, @ColorInt int color) {
-        if (drawable == null) return null;
-        drawable = DrawableCompat.wrap(drawable.mutate());
-        DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_IN);
-        DrawableCompat.setTint(drawable, color);
-        return drawable;
-    }
-
-    // This returns a NEW Drawable because of the mutate() call. The mutate() call is necessary because Drawables with the same resource have shared states otherwise.
-    @CheckResult
-    @Nullable
-    public static Drawable createTintedDrawable(@Nullable Drawable drawable, @NonNull ColorStateList sl) {
-        if (drawable == null) return null;
-        drawable = DrawableCompat.wrap(drawable.mutate());
-        DrawableCompat.setTintList(drawable, sl);
-        return drawable;
-    }
 
     public static void setCursorTint(@NonNull EditText editText, @ColorInt int color) {
         try {

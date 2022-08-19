@@ -1,5 +1,7 @@
 package util.mddesign.util;
 
+import static util.mddesign.drawable.DrawableUtil.createTintedDrawable;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -132,7 +134,7 @@ public class MenuTinter {
             field.setAccessible(true);
             Drawable collapseIcon = (Drawable) field.get(toolbar);
             if (collapseIcon != null) {
-                field.set(toolbar, TintHelper.createTintedDrawable(collapseIcon, color));
+                field.set(toolbar, createTintedDrawable(collapseIcon, color));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,7 +144,7 @@ public class MenuTinter {
             for (int i = 0; i < menu.size(); i++) {
                 final MenuItem item = menu.getItem(i);
                 if (item.getIcon() != null) {
-                    item.setIcon(TintHelper.createTintedDrawable(item.getIcon(), color));
+                    item.setIcon(createTintedDrawable(item.getIcon(), color));
                 }
                 // Search view theming
                 if (item.getActionView() != null && (item.getActionView() instanceof android.widget.SearchView || item.getActionView() instanceof androidx.appcompat.widget.SearchView)) {
@@ -245,7 +247,7 @@ public class MenuTinter {
                         View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
                 if (outViews.isEmpty()) return;
                 final AppCompatImageView overflow = (AppCompatImageView) outViews.get(0);
-                overflow.setImageDrawable(TintHelper.createTintedDrawable(overflow.getDrawable(), color));
+                overflow.setImageDrawable(createTintedDrawable(overflow.getDrawable(), color));
                 ViewUtil.removeOnGlobalLayoutListener(decorView, this);
             }
         });
@@ -256,7 +258,7 @@ public class MenuTinter {
             field.setAccessible(true);
             final ImageView imageView = (ImageView) field.get(target);
             if (imageView.getDrawable() != null)
-                imageView.setImageDrawable(TintHelper.createTintedDrawable(imageView.getDrawable(), color));
+                imageView.setImageDrawable(createTintedDrawable(imageView.getDrawable(), color));
         }
 
         public static void setSearchViewContentColor(View searchView, final @ColorInt int color) {

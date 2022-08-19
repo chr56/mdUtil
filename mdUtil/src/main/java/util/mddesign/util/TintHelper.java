@@ -1,10 +1,11 @@
 package util.mddesign.util;
 
+import static util.mddesign.color.ColorStateList.disabledColorStateList;
+import static util.mddesign.color.MiscKt.defaultRippleColor;
 import static util.mddesign.drawable.DrawableUtil.createTintedDrawable;
 import static util.mddesign.drawable.DrawableUtil.modifySwitchDrawable;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -39,37 +40,18 @@ import util.mddesign.R;
  */
 public final class TintHelper {
 
-    @SuppressLint("PrivateResource")
-    @ColorInt
-    private static int getDefaultRippleColor(@NonNull Context context, boolean useDarkRipple) {
-        // Light ripple is actually translucent black, and vice versa
-        return ContextCompat.getColor(context, useDarkRipple ?
-                androidx.appcompat.R.color.ripple_material_light : androidx.appcompat.R.color.ripple_material_dark);
-    }
-
-    @NonNull
-    private static ColorStateList getDisabledColorStateList(@ColorInt int normal, @ColorInt int disabled) {
-        return new ColorStateList(new int[][]{
-                new int[]{-android.R.attr.state_enabled},
-                new int[]{android.R.attr.state_enabled}
-        }, new int[]{
-                disabled,
-                normal
-        });
-    }
-
     @SuppressWarnings("deprecation")
     public static void setTintSelector(@NonNull View view, @ColorInt final int color, final boolean darker, final boolean useDarkTheme) {
         final boolean isColorLight = ColorUtil.isColorLight(color);
         final int disabled = ContextCompat.getColor(view.getContext(), useDarkTheme ? R.color.MD_button_disabled_dark : R.color.MD_button_disabled_light);
         final int pressed = ColorUtil.shiftColor(color, darker ? 0.9f : 1.1f);
         final int activated = ColorUtil.shiftColor(color, darker ? 1.1f : 0.9f);
-        final int rippleColor = getDefaultRippleColor(view.getContext(), isColorLight);
+        final int rippleColor = defaultRippleColor(view.getContext(), isColorLight);
         final int textColor = ContextCompat.getColor(view.getContext(), isColorLight ? R.color.MD_primary_text_light : R.color.MD_primary_text_dark);
 
         final ColorStateList sl;
         if (view instanceof Button) {
-            sl = getDisabledColorStateList(color, disabled);
+            sl = disabledColorStateList(color, disabled);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
                     view.getBackground() instanceof RippleDrawable) {
                 RippleDrawable rd = (RippleDrawable) view.getBackground();
@@ -78,7 +60,7 @@ public final class TintHelper {
 
             // Disabled text color state for buttons, may get overridden later by ATE tags
             final Button button = (Button) view;
-            button.setTextColor(getDisabledColorStateList(textColor, ContextCompat.getColor(view.getContext(), useDarkTheme ? R.color.MD_button_text_disabled_dark : R.color.MD_button_text_disabled_light)));
+            button.setTextColor(disabledColorStateList(textColor, ContextCompat.getColor(view.getContext(), useDarkTheme ? R.color.MD_button_text_disabled_dark : R.color.MD_button_text_disabled_light)));
         } else if (view instanceof FloatingActionButton) {
             // FloatingActionButton doesn't support disabled state?
             sl = new ColorStateList(new int[][]{
@@ -122,7 +104,7 @@ public final class TintHelper {
 
         if (view instanceof TextView && !(view instanceof Button)) {
             final TextView tv = (TextView) view;
-            tv.setTextColor(getDisabledColorStateList(textColor, ContextCompat.getColor(view.getContext(), isColorLight ? R.color.MD_text_disabled_light : R.color.MD_text_disabled_dark)));
+            tv.setTextColor(disabledColorStateList(textColor, ContextCompat.getColor(view.getContext(), isColorLight ? R.color.MD_text_disabled_light : R.color.MD_text_disabled_dark)));
         }
     }
 
@@ -209,7 +191,7 @@ public final class TintHelper {
     }
 
     public static void setTint(@NonNull SeekBar seekBar, @ColorInt int color, boolean useDarker) {
-        final ColorStateList s1 = getDisabledColorStateList(color,
+        final ColorStateList s1 = disabledColorStateList(color,
                 ContextCompat.getColor(seekBar.getContext(), useDarker ? R.color.MD_control_disabled_dark : R.color.MD_control_disabled_light));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             seekBar.setThumbTintList(s1);

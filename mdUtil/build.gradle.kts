@@ -55,7 +55,7 @@ tasks.create("sourceJar", type = Jar::class) {
         sourceSet.java.srcDirs,
         sourceSet.resources.srcDirs
     )
-    archiveFileName.set("sources")
+    archiveClassifier.set("source")
 }
 
 dependencies {
@@ -68,16 +68,16 @@ dependencies {
     implementation("com.google.android.material:material:1.4.0")
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            artifact(tasks.getByName("sourceJar"))
-            afterEvaluate {
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                artifact(tasks.getByName("sourceJar"))
                 artifact(tasks.getByName("bundleReleaseAar"))
+                groupId = "com.github.chr56"
+                artifactId = "mdUtil"
+                version = libVersion
             }
-            groupId = "com.github.chr56"
-            artifactId = "mdUtil"
-            version = libVersion
         }
     }
 }

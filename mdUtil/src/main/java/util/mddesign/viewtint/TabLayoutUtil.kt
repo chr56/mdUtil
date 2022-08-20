@@ -1,6 +1,6 @@
 @file:JvmName("TabLayoutUtil")
 
-package util.mddesign.util
+package util.mddesign.viewtint
 
 import androidx.annotation.ColorInt
 import com.google.android.material.tabs.TabLayout

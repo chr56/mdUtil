@@ -34,6 +34,7 @@ import java.lang.reflect.Field;
 
 import util.mdcolor.ColorUtil;
 import util.mddesign.R;
+import util.mddesign.color.MiscKt;
 
 /**
  * @author afollestad, plusCubed
@@ -110,7 +111,7 @@ public final class TintHelper {
 
     public static void setTintAuto(final @NonNull View view, final @ColorInt int color,
                                    boolean background) {
-        setTintAuto(view, color, background, Util.isWindowBackgroundDark(view.getContext()));
+        setTintAuto(view, color, background, MiscKt.isWindowBackgroundDark(view.getContext()));
     }
 
     @SuppressWarnings("deprecation")

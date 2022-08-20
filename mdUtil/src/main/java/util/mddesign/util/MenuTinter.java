@@ -34,9 +34,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import util.mdcolor.ColorUtil;
-import util.mddesign.R;
 import util.mdcolor.MaterialColor;
 import util.mdcolor.pref.ThemeColor;
+import util.mddesign.color.MiscKt;
 
 /**
  * @author Karim Abou Zeid (kabouzeid), chr_56 [modify]
@@ -197,7 +197,7 @@ public class MenuTinter {
                             Field radioButtonField = ListMenuItemView.class.getDeclaredField("mRadioButton");
                             radioButtonField.setAccessible(true);
 
-                            final boolean isDark = !ColorUtil.isColorLight(Util.resolveColor(context, android.R.attr.windowBackground));
+                            final boolean isDark = !ColorUtil.isColorLight(MiscKt.resolveColor(context, android.R.attr.windowBackground));
 
                             for (int i = 0; i < listView.getChildCount(); i++) {
                                 View v = listView.getChildAt(i);

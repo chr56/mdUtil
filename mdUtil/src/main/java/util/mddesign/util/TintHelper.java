@@ -175,22 +175,4 @@ public final class TintHelper {
             }
         }
     }
-
-    public static void setTint(@NonNull CheckBox box, @ColorInt int color, boolean useDarker) {
-        ColorStateList sl = new ColorStateList(new int[][]{
-                new int[]{-android.R.attr.state_enabled},
-                new int[]{android.R.attr.state_enabled, -android.R.attr.state_checked},
-                new int[]{android.R.attr.state_enabled, android.R.attr.state_checked}
-        }, new int[]{
-                ContextCompat.getColor(box.getContext(), useDarker ? R.color.MD_control_disabled_dark : R.color.MD_control_disabled_light),
-                ContextCompat.getColor(box.getContext(), useDarker ? R.color.MD_control_normal_dark : R.color.MD_control_normal_light),
-                color
-        });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            box.setButtonTintList(sl);
-        } else {
-            Drawable drawable = createTintedDrawable(ContextCompat.getDrawable(box.getContext(), androidx.appcompat.R.drawable.abc_btn_check_material), sl);
-            box.setButtonDrawable(drawable);
-        }
-    }
 }

@@ -213,7 +213,7 @@ public class MenuTinter {
 
                                 CheckBox check = (CheckBox) checkboxField.get(iv);
                                 if (check != null) {
-                                    TintHelper.setTint(check, color, isDark);
+                                    CheckBoxUtil.setTint(check, color, isDark);
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                                         check.setBackground(null);
                                 }

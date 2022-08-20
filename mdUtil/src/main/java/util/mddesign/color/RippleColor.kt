@@ -1,3 +1,4 @@
+@file:JvmName("RippleColor")
 package util.mddesign.color
 
 import android.content.Context

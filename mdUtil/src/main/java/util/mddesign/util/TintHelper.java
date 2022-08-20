@@ -1,7 +1,7 @@
 package util.mddesign.util;
 
 import static util.mddesign.color.ColorStateList.disabledColorStateList;
-import static util.mddesign.color.MiscKt.defaultRippleColor;
+import static util.mddesign.color.RippleColor.defaultRippleColor;
 import static util.mddesign.drawable.DrawableUtil.createTintedDrawable;
 import static util.mddesign.drawable.DrawableUtil.modifySwitchDrawable;
 

@@ -16,7 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import util.mdcolor.ColorUtil;
 import util.mddesign.util.MenuTinter;
 import util.mddesign.util.TintHelper;
-import util.mddesign.viewtint.ToolbarTinter;
+import util.mddesign.viewtint.ToolbarUtil;
 
 import static android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
 
@@ -111,7 +111,7 @@ public final class Themer {
         if (toolbar != null) {
             toolbar.setBackgroundColor(color);
             MenuTinter.setMenuColor_White(activity,toolbar,toolbar.getMenu());
-            ToolbarTinter.setToolbarColorAuto(activity, toolbar, null, color);
+            ToolbarUtil.setToolbarColorAuto(activity, toolbar, null, color);
         }
     }
 

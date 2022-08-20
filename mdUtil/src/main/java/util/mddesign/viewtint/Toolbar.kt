@@ -1,4 +1,4 @@
-@file:JvmName("ToolbarTinter")
+@file:JvmName("ToolbarUtil")
 
 package util.mddesign.viewtint
 

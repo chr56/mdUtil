@@ -35,6 +35,7 @@ import java.lang.reflect.Field;
 import util.mdcolor.ColorUtil;
 import util.mddesign.R;
 import util.mddesign.color.MiscKt;
+import util.mddesign.viewtint.ProgressBarUtil;
 
 /**
  * @author afollestad, plusCubed
@@ -123,7 +124,7 @@ public final class TintHelper {
             else if (view instanceof SeekBar)
                 setTint((SeekBar) view, color, isDark);
             else if (view instanceof ProgressBar)
-                setTint((ProgressBar) view, color);
+                ProgressBarUtil.setTint((ProgressBar) view, color);
             else if (view instanceof EditText)
                 setTint((EditText) view, color, isDark);
             else if (view instanceof CheckBox)
@@ -213,29 +214,6 @@ public final class TintHelper {
                 seekBar.getIndeterminateDrawable().setColorFilter(color, mode);
             if (seekBar.getProgressDrawable() != null)
                 seekBar.getProgressDrawable().setColorFilter(color, mode);
-        }
-    }
-
-    public static void setTint(@NonNull ProgressBar progressBar, @ColorInt int color) {
-        setTint(progressBar, color, false);
-    }
-
-    public static void setTint(@NonNull ProgressBar progressBar, @ColorInt int color, boolean skipIndeterminate) {
-        ColorStateList sl = ColorStateList.valueOf(color);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            progressBar.setProgressTintList(sl);
-            progressBar.setSecondaryProgressTintList(sl);
-            if (!skipIndeterminate)
-                progressBar.setIndeterminateTintList(sl);
-        } else {
-            PorterDuff.Mode mode = PorterDuff.Mode.SRC_IN;
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
-                mode = PorterDuff.Mode.MULTIPLY;
-            }
-            if (!skipIndeterminate && progressBar.getIndeterminateDrawable() != null)
-                progressBar.getIndeterminateDrawable().setColorFilter(color, mode);
-            if (progressBar.getProgressDrawable() != null)
-                progressBar.getProgressDrawable().setColorFilter(color, mode);
         }
     }
 

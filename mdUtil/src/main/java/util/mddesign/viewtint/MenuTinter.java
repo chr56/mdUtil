@@ -220,7 +220,7 @@ public class MenuTinter {
 
                                 RadioButton radioButton = (RadioButton) radioButtonField.get(iv);
                                 if (radioButton != null) {
-                                    TintHelper.setTint(radioButton, color, isDark);
+                                    RadioButtonUtil.setTint(radioButton, color, isDark);
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                                         radioButton.setBackground(null);
                                 }

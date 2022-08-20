@@ -36,6 +36,7 @@ import util.mdcolor.ColorUtil;
 import util.mddesign.R;
 import util.mddesign.color.MiscKt;
 import util.mddesign.viewtint.ProgressBarUtil;
+import util.mddesign.viewtint.RadioButtonUtil;
 
 /**
  * @author afollestad, plusCubed
@@ -120,7 +121,7 @@ public final class TintHelper {
                                    boolean background, final boolean isDark) {
         if (!background) {
             if (view instanceof RadioButton)
-                setTint((RadioButton) view, color, isDark);
+                RadioButtonUtil.setTint((RadioButton) view, color, isDark);
             else if (view instanceof SeekBar)
                 setTint((SeekBar) view, color, isDark);
             else if (view instanceof ProgressBar)
@@ -170,25 +171,6 @@ public final class TintHelper {
                     ViewUtil.setBackgroundCompat(view, drawable);
                 }
             }
-        }
-    }
-
-    public static void setTint(@NonNull RadioButton radioButton, @ColorInt int color, boolean useDarker) {
-        ColorStateList sl = new ColorStateList(new int[][]{
-                new int[]{-android.R.attr.state_enabled},
-                new int[]{android.R.attr.state_enabled, -android.R.attr.state_checked},
-                new int[]{android.R.attr.state_enabled, android.R.attr.state_checked}
-        }, new int[]{
-                // Rdio button includes own alpha for disabled state
-                ColorUtil.stripAlpha(ContextCompat.getColor(radioButton.getContext(), useDarker ? R.color.MD_control_disabled_dark : R.color.MD_control_disabled_light)),
-                ContextCompat.getColor(radioButton.getContext(), useDarker ? R.color.MD_control_normal_dark : R.color.MD_control_normal_light),
-                color
-        });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            radioButton.setButtonTintList(sl);
-        } else {
-            Drawable d = createTintedDrawable(ContextCompat.getDrawable(radioButton.getContext(), androidx.appcompat.R.drawable.abc_btn_radio_material), sl);
-            radioButton.setButtonDrawable(d);
         }
     }
 

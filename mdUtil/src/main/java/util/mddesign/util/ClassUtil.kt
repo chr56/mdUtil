@@ -1,7 +1,7 @@
 /**
  * @author Aidan Follestad (afollestad)
  */
-@file:JvmName("Util")
+@file:JvmName("ClassUtil")
 
 package util.mddesign.util
 

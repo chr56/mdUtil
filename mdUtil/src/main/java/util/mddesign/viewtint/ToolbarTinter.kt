@@ -1,6 +1,6 @@
 @file:JvmName("ToolbarTinter")
 
-package util.mddesign.util
+package util.mddesign.viewtint
 
 import android.content.Context
 import android.view.Menu

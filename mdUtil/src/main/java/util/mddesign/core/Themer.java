@@ -16,7 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import util.mdcolor.ColorUtil;
 import util.mddesign.util.MenuTinter;
 import util.mddesign.util.TintHelper;
-import util.mddesign.util.ToolbarTinter;
+import util.mddesign.viewtint.ToolbarTinter;
 
 import static android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
 

@@ -11,7 +11,7 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.widget.Toolbar
 import util.mdcolor.ColorUtil
 import util.mdcolor.pref.ThemeColor
-import util.mddesign.viewtint.MenuTinter
+import util.mddesign.viewtint.setMenuColor_White
 import util.mddesign.viewtint.setToolbarColorAuto
 import util.mddesign.viewtint.tint
 
@@ -117,7 +117,7 @@ object Themer {
 
     fun setActivityToolbarColor(activity: Activity, toolbar: Toolbar, color: Int) {
         toolbar.setBackgroundColor(color)
-        MenuTinter.setMenuColor_White(activity, toolbar, toolbar.menu)
+        setMenuColor_White(activity, toolbar, toolbar.menu)
         setToolbarColorAuto(activity, toolbar, null, color)
     }
 

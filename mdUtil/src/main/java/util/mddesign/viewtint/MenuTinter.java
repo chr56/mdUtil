@@ -12,10 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.SearchView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -46,13 +45,14 @@ import util.mddesign.util.ViewUtil;
 public class MenuTinter {
     /**
      * tint the menu
-     * @param context context of toolbar's container
-     * @param toolbar menu's container
-     * @param menu the menu to tint
+     *
+     * @param context         context of toolbar's container
+     * @param toolbar         menu's container
+     * @param menu            the menu to tint
      * @param menuWidgetColor menu icon color
      */
-    public static void setMenuColor(@NonNull Context context,Toolbar toolbar,@NonNull Menu menu,
-                                       final @ColorInt int menuWidgetColor) {
+    public static void setMenuColor(@NonNull Context context, Toolbar toolbar, @NonNull Menu menu,
+                                    final @ColorInt int menuWidgetColor) {
         tintMenu(toolbar, menu, menuWidgetColor);
         applyOverflowMenuTint(context, toolbar, menuWidgetColor);
 
@@ -94,27 +94,32 @@ public class MenuTinter {
 
     /**
      * tint the menu, menu icon color is current accent color
+     *
      * @param context context of toolbar's container
      * @param toolbar menu's container
-     * @param menu the menu to tint
+     * @param menu    the menu to tint
      */
     public static void setMenuColor_Accent(@NonNull Context context, Toolbar toolbar, Menu menu) {
         setMenuColor(context, toolbar, menu, ThemeColor.accentColor(context));
     }
+
     /**
      * tint the menu, menu icon color is just white
+     *
      * @param context context of toolbar's container
      * @param toolbar menu's container
-     * @param menu the menu to tint
+     * @param menu    the menu to tint
      */
     public static void setMenuColor_White(@NonNull Context context, Toolbar toolbar, Menu menu) {
         setMenuColor(context, toolbar, menu, MaterialColor.White._1000.getAsColor());
     }
+
     /**
      * tint the menu, menu icon color is just black
+     *
      * @param context context of toolbar's container
      * @param toolbar menu's container
-     * @param menu the menu to tint
+     * @param menu    the menu to tint
      */
     public static void setMenuColor_Black(@NonNull Context context, Toolbar toolbar, Menu menu) {
         setMenuColor(context, toolbar, menu, MaterialColor.Black._1000.getAsColor());
@@ -124,10 +129,10 @@ public class MenuTinter {
                                                   int widgetColor) {
         applyOverflowMenuTint(activity, toolbar, widgetColor);
     }
+
     public static void handleOnPrepareOptionsMenu(Activity activity, Toolbar toolbar) {
         applyOverflowMenuTint(activity, toolbar, ThemeColor.accentColor(activity));
     }
-
 
 
     private static void tintMenu(@NonNull Toolbar toolbar, @Nullable Menu menu, final @ColorInt int color) {
@@ -150,7 +155,7 @@ public class MenuTinter {
                 }
                 // Search view theming
                 if (item.getActionView() != null && (item.getActionView() instanceof android.widget.SearchView || item.getActionView() instanceof androidx.appcompat.widget.SearchView)) {
-                    SearchViewTintUtil.setSearchViewContentColor(item.getActionView(), color);
+                    SearchViewTintUtil.setSearchViewContentColor((SearchView) item.getActionView(), color);
                 }
             }
         }
@@ -255,42 +260,6 @@ public class MenuTinter {
         });
     }
 
-    private static final class SearchViewTintUtil {
-        private static void tintImageView(Object target, Field field, final @ColorInt int color) throws Exception {
-            field.setAccessible(true);
-            final ImageView imageView = (ImageView) field.get(target);
-            if (imageView.getDrawable() != null)
-                imageView.setImageDrawable(createTintedDrawable(imageView.getDrawable(), color));
-        }
-
-        public static void setSearchViewContentColor(View searchView, final @ColorInt int color) {
-            if (searchView == null) return;
-            final Class<?> cls = searchView.getClass();
-            try {
-                final Field mSearchSrcTextViewField = cls.getDeclaredField("mSearchSrcTextView");
-                mSearchSrcTextViewField.setAccessible(true);
-                final EditText mSearchSrcTextView = (EditText) mSearchSrcTextViewField.get(searchView);
-                mSearchSrcTextView.setTextColor(color);
-                mSearchSrcTextView.setHintTextColor(ColorUtil.adjustAlpha(color, 0.5f));
-                TintHelper.setCursorTint(mSearchSrcTextView, color);
-
-                Field field = cls.getDeclaredField("mSearchButton");
-                tintImageView(searchView, field, color);
-                field = cls.getDeclaredField("mGoButton");
-                tintImageView(searchView, field, color);
-                field = cls.getDeclaredField("mCloseButton");
-                tintImageView(searchView, field, color);
-                field = cls.getDeclaredField("mVoiceButton");
-                tintImageView(searchView, field, color);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        private SearchViewTintUtil() {
-        }
-    }
-
     private static class _MenuPresenterCallback implements MenuPresenter.Callback {
 
         public _MenuPresenterCallback(Context context, final @ColorInt int color, MenuPresenter.Callback parentCb, Toolbar toolbar) {
@@ -317,6 +286,7 @@ public class MenuTinter {
             return mParentCb != null && mParentCb.onOpenSubMenu(subMenu);
         }
     }
+
     private static class _OnMenuItemClickListener implements Toolbar.OnMenuItemClickListener {
 
         private Context mContext;

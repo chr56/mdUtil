@@ -37,6 +37,7 @@ import util.mddesign.R;
 import util.mddesign.color.MiscKt;
 import util.mddesign.viewtint.CheckBoxUtil;
 import util.mddesign.viewtint.EditTextUtil;
+import util.mddesign.viewtint.ImageViewUtil;
 import util.mddesign.viewtint.ProgressBarUtil;
 import util.mddesign.viewtint.RadioButtonUtil;
 import util.mddesign.viewtint.SeekBarUtil;
@@ -135,7 +136,7 @@ public final class TintHelper {
             else if (view instanceof CheckBox)
                 CheckBoxUtil.setTint((CheckBox) view, color, isDark);
             else if (view instanceof ImageView)
-                setTint((ImageView) view, color);
+                ImageViewUtil.setDrawableColor((ImageView) view, color);
             else if (view instanceof Switch)
                 SwitchUtil.setTint((Switch) view, color, isDark);
             else if (view instanceof SwitchCompat)

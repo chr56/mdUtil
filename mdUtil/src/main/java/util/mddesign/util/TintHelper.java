@@ -35,6 +35,7 @@ import java.lang.reflect.Field;
 import util.mdcolor.ColorUtil;
 import util.mddesign.R;
 import util.mddesign.color.MiscKt;
+import util.mddesign.viewtint.EditTextUtil;
 import util.mddesign.viewtint.ProgressBarUtil;
 import util.mddesign.viewtint.RadioButtonUtil;
 import util.mddesign.viewtint.SeekBarUtil;
@@ -128,7 +129,7 @@ public final class TintHelper {
             else if (view instanceof ProgressBar)
                 ProgressBarUtil.setTint((ProgressBar) view, color);
             else if (view instanceof EditText)
-                setTint((EditText) view, color, isDark);
+                EditTextUtil.setTint((EditText) view, color, isDark);
             else if (view instanceof CheckBox)
                 setTint((CheckBox) view, color, isDark);
             else if (view instanceof ImageView)
@@ -173,24 +174,6 @@ public final class TintHelper {
                 }
             }
         }
-    }
-
-    public static void setTint(@NonNull EditText editText, @ColorInt int color, boolean useDarker) {
-        final ColorStateList editTextColorStateList = new ColorStateList(new int[][]{
-                new int[]{-android.R.attr.state_enabled},
-                new int[]{android.R.attr.state_enabled, -android.R.attr.state_pressed, -android.R.attr.state_focused},
-                new int[]{}
-        }, new int[]{
-                ContextCompat.getColor(editText.getContext(), useDarker ? R.color.MD_text_disabled_dark : R.color.MD_text_disabled_light),
-                ContextCompat.getColor(editText.getContext(), useDarker ? R.color.MD_control_normal_dark : R.color.MD_control_normal_light),
-                color
-        });
-        if (editText instanceof AppCompatEditText) {
-            ((AppCompatEditText) editText).setSupportBackgroundTintList(editTextColorStateList);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            editText.setBackgroundTintList(editTextColorStateList);
-        }
-        setCursorTint(editText, color);
     }
 
     public static void setTint(@NonNull CheckBox box, @ColorInt int color, boolean useDarker) {

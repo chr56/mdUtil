@@ -14,8 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
 import util.mdcolor.ColorUtil;
+import static util.mddesign.viewtint.Auto.setTintAuto;
 import util.mddesign.viewtint.MenuTinter;
-import util.mddesign.util.TintHelper;
 import util.mddesign.viewtint.ToolbarUtil;
 
 import static android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
@@ -129,11 +129,11 @@ public final class Themer {
     }
 
     public static void setTint(@NonNull View view, @ColorInt int color) {
-        TintHelper.setTintAuto(view, color, false);
+        setTintAuto(view, color, false);
     }
 
     public static void setBackgroundTint(@NonNull View view, @ColorInt int color) {
-        TintHelper.setTintAuto(view, color, true);
+        setTintAuto(view, color, true);
     }
 
     private Themer() {

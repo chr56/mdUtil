@@ -36,7 +36,6 @@ import util.mdcolor.ColorUtil;
 import util.mdcolor.MaterialColor;
 import util.mdcolor.pref.ThemeColor;
 import util.mddesign.color.MiscKt;
-import util.mddesign.util.TintHelper;
 import util.mddesign.util.ViewUtil;
 
 /**

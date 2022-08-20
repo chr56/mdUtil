@@ -1,6 +1,6 @@
-@file:JvmName("TintHelper")
+@file:JvmName("Auto")
 
-package util.mddesign.util
+package util.mddesign.viewtint
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.RippleDrawable
@@ -14,9 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import util.mdcolor.ColorUtil
 import util.mddesign.color.isWindowBackgroundDark
 import util.mddesign.drawable.createTintedDrawable
-import util.mddesign.viewtint.setDrawableColor
-import util.mddesign.viewtint.setTint
-import util.mddesign.viewtint.setTintSelector
+import util.mddesign.util.setBackgroundCompat
 
 /**
  * @author afollestad, plusCubed

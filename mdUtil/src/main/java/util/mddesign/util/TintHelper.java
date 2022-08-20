@@ -3,11 +3,9 @@ package util.mddesign.util;
 import static util.mddesign.color.ColorStateList.disabledColorStateList;
 import static util.mddesign.color.RippleColor.defaultRippleColor;
 import static util.mddesign.drawable.DrawableUtil.createTintedDrawable;
-import static util.mddesign.drawable.DrawableUtil.modifySwitchDrawable;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
@@ -24,7 +22,6 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 
@@ -194,56 +191,6 @@ public final class TintHelper {
         } else {
             Drawable drawable = createTintedDrawable(ContextCompat.getDrawable(box.getContext(), androidx.appcompat.R.drawable.abc_btn_check_material), sl);
             box.setButtonDrawable(drawable);
-        }
-    }
-
-    public static void setTint(@NonNull ImageView image, @ColorInt int color) {
-        image.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-    }
-
-    public static void setTint(@NonNull Switch switchView, @ColorInt int color, boolean useDarker) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) return;
-        if (switchView.getTrackDrawable() != null) {
-            switchView.setTrackDrawable(modifySwitchDrawable(switchView.getContext(),
-                    switchView.getTrackDrawable(), color, false, false, useDarker));
-        }
-        if (switchView.getThumbDrawable() != null) {
-            switchView.setThumbDrawable(modifySwitchDrawable(switchView.getContext(),
-                    switchView.getThumbDrawable(), color, true, false, useDarker));
-        }
-    }
-
-    public static void setTint(@NonNull SwitchCompat switchView, @ColorInt int color, boolean useDarker) {
-        if (switchView.getTrackDrawable() != null) {
-            switchView.setTrackDrawable(modifySwitchDrawable(switchView.getContext(),
-                    switchView.getTrackDrawable(), color, false, true, useDarker));
-        }
-        if (switchView.getThumbDrawable() != null) {
-            switchView.setThumbDrawable(modifySwitchDrawable(switchView.getContext(),
-                    switchView.getThumbDrawable(), color, true, true, useDarker));
-        }
-    }
-
-
-    public static void setCursorTint(@NonNull EditText editText, @ColorInt int color) {
-        try {
-            Field fCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
-            fCursorDrawableRes.setAccessible(true);
-            int mCursorDrawableRes = fCursorDrawableRes.getInt(editText);
-            Field fEditor = TextView.class.getDeclaredField("mEditor");
-            fEditor.setAccessible(true);
-            Object editor = fEditor.get(editText);
-            Class<?> clazz = editor.getClass();
-            Field fCursorDrawable = clazz.getDeclaredField("mCursorDrawable");
-            fCursorDrawable.setAccessible(true);
-            Drawable[] drawables = new Drawable[2];
-            drawables[0] = ContextCompat.getDrawable(editText.getContext(), mCursorDrawableRes);
-            drawables[0] = createTintedDrawable(drawables[0], color);
-            drawables[1] = ContextCompat.getDrawable(editText.getContext(), mCursorDrawableRes);
-            drawables[1] = createTintedDrawable(drawables[1], color);
-            fCursorDrawable.set(editor, drawables);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

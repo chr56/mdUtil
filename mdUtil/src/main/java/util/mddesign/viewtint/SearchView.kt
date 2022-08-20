@@ -31,7 +31,7 @@ internal fun SearchView.tintTextView(@ColorInt color: Int) {
     val mSearchSrcTextView = mSearchSrcTextViewField[this] as EditText
     mSearchSrcTextView.setTextColor(color)
     mSearchSrcTextView.setHintTextColor(ColorUtil.adjustAlpha(color, 0.5f))
-    TintHelper.setCursorTint(mSearchSrcTextView, color)
+    setCursorTint(mSearchSrcTextView, color)
 }
 
 internal fun SearchView.tintImageView(fieldName: String, @ColorInt color: Int) {

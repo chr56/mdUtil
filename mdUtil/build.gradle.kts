@@ -11,11 +11,17 @@ android {
     compileSdk = 32
     buildToolsVersion = "32.0.0"
 
+    namespace = "util.mddesign"
+
     defaultConfig {
         minSdk = 23
         targetSdk = 32
 
         consumerProguardFiles.add(File("consumer-rules.pro"))
+
+        aarMetadata {
+            minCompileSdk = 23
+        }
     }
     sourceSets {
         named("main") {
@@ -40,6 +46,14 @@ android {
         buildConfig = false
     }
 
+    publishing {
+        publishing {
+            singleVariant("release") {
+                withSourcesJar()
+            }
+        }
+    }
+
     afterEvaluate {
         tasks.withType(JavaCompile::class.java) {
             options.compilerArgs.apply {
@@ -49,31 +63,21 @@ android {
     }
 }
 
-tasks.create("sourceJar", type = Jar::class) {
-    val sourceSet = android.sourceSets.getByName("main")
-    from(
-        sourceSet.java.srcDirs,
-        sourceSet.resources.srcDirs
-    )
-    archiveClassifier.set("source")
-}
-
 dependencies {
     api("com.github.chr56:mdColor:0.0.1")
     compileOnly("androidx.appcompat:appcompat:1.4.1")
     compileOnly("com.google.android.material:material:1.4.0")
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                artifact(tasks.getByName("sourceJar"))
-                artifact(tasks.getByName("bundleReleaseAar"))
-                groupId = "com.github.chr56"
-                artifactId = "mdUtil"
-                version = libVersion
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            afterEvaluate {
+                from(components["release"])
             }
+            groupId = "com.github.chr56"
+            artifactId = "mdUtil"
+            version = libVersion
         }
     }
 }

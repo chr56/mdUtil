@@ -37,6 +37,7 @@ import util.mddesign.R;
 import util.mddesign.color.MiscKt;
 import util.mddesign.viewtint.ProgressBarUtil;
 import util.mddesign.viewtint.RadioButtonUtil;
+import util.mddesign.viewtint.SeekBarUtil;
 
 /**
  * @author afollestad, plusCubed
@@ -123,7 +124,7 @@ public final class TintHelper {
             if (view instanceof RadioButton)
                 RadioButtonUtil.setTint((RadioButton) view, color, isDark);
             else if (view instanceof SeekBar)
-                setTint((SeekBar) view, color, isDark);
+                SeekBarUtil.setTint((SeekBar) view, color, isDark);
             else if (view instanceof ProgressBar)
                 ProgressBarUtil.setTint((ProgressBar) view, color);
             else if (view instanceof EditText)
@@ -171,31 +172,6 @@ public final class TintHelper {
                     ViewUtil.setBackgroundCompat(view, drawable);
                 }
             }
-        }
-    }
-
-    public static void setTint(@NonNull SeekBar seekBar, @ColorInt int color, boolean useDarker) {
-        final ColorStateList s1 = disabledColorStateList(color,
-                ContextCompat.getColor(seekBar.getContext(), useDarker ? R.color.MD_control_disabled_dark : R.color.MD_control_disabled_light));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            seekBar.setThumbTintList(s1);
-            seekBar.setProgressTintList(s1);
-        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1) {
-            Drawable progressDrawable = createTintedDrawable(seekBar.getProgressDrawable(), s1);
-            seekBar.setProgressDrawable(progressDrawable);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                Drawable thumbDrawable = createTintedDrawable(seekBar.getThumb(), s1);
-                seekBar.setThumb(thumbDrawable);
-            }
-        } else {
-            PorterDuff.Mode mode = PorterDuff.Mode.SRC_IN;
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
-                mode = PorterDuff.Mode.MULTIPLY;
-            }
-            if (seekBar.getIndeterminateDrawable() != null)
-                seekBar.getIndeterminateDrawable().setColorFilter(color, mode);
-            if (seekBar.getProgressDrawable() != null)
-                seekBar.getProgressDrawable().setColorFilter(color, mode);
         }
     }
 

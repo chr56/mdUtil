@@ -57,7 +57,7 @@ android {
     afterEvaluate {
         tasks.withType(JavaCompile::class.java) {
             options.compilerArgs.apply {
-                add("-Xlint:deprecation")
+                // add("-Xlint:deprecation")
             }
         }
     }

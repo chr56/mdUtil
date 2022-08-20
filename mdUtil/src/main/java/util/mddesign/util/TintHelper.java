@@ -35,6 +35,7 @@ import java.lang.reflect.Field;
 import util.mdcolor.ColorUtil;
 import util.mddesign.R;
 import util.mddesign.color.MiscKt;
+import util.mddesign.viewtint.CheckBoxUtil;
 import util.mddesign.viewtint.EditTextUtil;
 import util.mddesign.viewtint.ProgressBarUtil;
 import util.mddesign.viewtint.RadioButtonUtil;
@@ -131,7 +132,7 @@ public final class TintHelper {
             else if (view instanceof EditText)
                 EditTextUtil.setTint((EditText) view, color, isDark);
             else if (view instanceof CheckBox)
-                setTint((CheckBox) view, color, isDark);
+                CheckBoxUtil.setTint((CheckBox) view, color, isDark);
             else if (view instanceof ImageView)
                 setTint((ImageView) view, color);
             else if (view instanceof Switch)

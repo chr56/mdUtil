@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
 import util.mdcolor.ColorUtil;
-import util.mddesign.util.MenuTinter;
+import util.mddesign.viewtint.MenuTinter;
 import util.mddesign.util.TintHelper;
 import util.mddesign.viewtint.ToolbarUtil;
 

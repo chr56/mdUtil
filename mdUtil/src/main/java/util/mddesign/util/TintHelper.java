@@ -40,6 +40,7 @@ import util.mddesign.viewtint.EditTextUtil;
 import util.mddesign.viewtint.ProgressBarUtil;
 import util.mddesign.viewtint.RadioButtonUtil;
 import util.mddesign.viewtint.SeekBarUtil;
+import util.mddesign.viewtint.SwitchUtil;
 
 /**
  * @author afollestad, plusCubed
@@ -136,9 +137,9 @@ public final class TintHelper {
             else if (view instanceof ImageView)
                 setTint((ImageView) view, color);
             else if (view instanceof Switch)
-                setTint((Switch) view, color, isDark);
+                SwitchUtil.setTint((Switch) view, color, isDark);
             else if (view instanceof SwitchCompat)
-                setTint((SwitchCompat) view, color, isDark);
+                SwitchUtil.setTint((SwitchCompat) view, color, isDark);
             else background = true;
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&

@@ -6,6 +6,9 @@ import android.content.Context
 import android.view.Menu
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.Toolbar
+import util.mddesign.color.toolbarContentColor
+import util.mddesign.color.toolbarSubtitleColor
+import util.mddesign.color.toolbarTitleColor
 import util.mddesign.drawable.createTintedDrawable
 
 /**

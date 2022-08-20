@@ -1,6 +1,6 @@
-@file:JvmName("ToolbarColorUtil")
+@file:JvmName("ToolbarColor")
 
-package util.mddesign.util
+package util.mddesign.color
 
 import android.content.Context
 import androidx.annotation.CheckResult

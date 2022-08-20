@@ -66,20 +66,20 @@ public final class Themer {
         }
     }
 
-    public static void setLightNavigationbar(Activity activity, boolean enabled){
+    public static void setLightNavigationbar(Activity activity, boolean enabled) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             final WindowInsetsController wic = activity.getWindow().getInsetsController();
-            if (wic != null){
-                if(enabled) {
+            if (wic != null) {
+                if (enabled) {
                     wic.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS, WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS);
                 } else {
-                    wic.setSystemBarsAppearance(0,WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS);
+                    wic.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS);
                 }
             }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             final View decorView = activity.getWindow().getDecorView();
             int systemUiVisibility = decorView.getSystemUiVisibility();
-            if(enabled){
+            if (enabled) {
                 systemUiVisibility |= SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
             } else {
                 systemUiVisibility &= ~SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
@@ -110,7 +110,7 @@ public final class Themer {
     public static void setActivityToolbarColor(Activity activity, @Nullable Toolbar toolbar, int color) {
         if (toolbar != null) {
             toolbar.setBackgroundColor(color);
-            MenuTinter.setMenuColor_White(activity,toolbar,toolbar.getMenu());
+            MenuTinter.setMenuColor_White(activity, toolbar, toolbar.getMenu());
             ToolbarUtil.setToolbarColorAuto(activity, toolbar, null, color);
         }
     }

@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.SearchView
 import androidx.annotation.ColorInt
 import util.mdcolor.ColorUtil
-import util.mddesign.util.TintHelper
 
 fun setSearchViewContentColor(searchView: SearchView?, @ColorInt color: Int) {
     if (searchView != null) {

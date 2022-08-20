@@ -59,13 +59,9 @@ tasks.create("sourceJar", type = Jar::class) {
 }
 
 dependencies {
-
-    implementation("com.github.chr56:mdColor:0.0.1")
-
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.core:core:1.7.0")
-
-    implementation("com.google.android.material:material:1.4.0")
+    api("com.github.chr56:mdColor:0.0.1")
+    compileOnly("androidx.appcompat:appcompat:1.4.1")
+    compileOnly("com.google.android.material:material:1.4.0")
 }
 
 afterEvaluate {
